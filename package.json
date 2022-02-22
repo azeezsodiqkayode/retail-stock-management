@@ -4,12 +4,14 @@
   "description": "Retail Stock Management",
   "main": "index.js",
   "scripts": {
+    "start": "nodr index.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "taofeeq Adedokun <feeq2022@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mysql2": "^2.3.3"
   }
 }
