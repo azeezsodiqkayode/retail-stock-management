@@ -21,34 +21,65 @@ const createNewRetailUser = (req, res) => {
             message: "Bad Request"
         })
         }
-        const { fullName, email, Admin_id, password, IsAdmin } = req.body
+     
+    const { fullName, email, Admin_id, password, IsAdmin } = req.body
 
-        testmodel.newRetaiUser(fullName, email, Admin_id, password, IsAdmin)
-
+    testmodel.checkNewRetaiUser(email)
+    .then(testmodelAdminExist => {
+      if (testmodelAdminExist ==""){
+          throw new Error("Account already exist")
+       }
+      return testmodel.newRetaiUser(fullName, email, Admin_id, password, IsAdmin)
+    })
     .then(testmodel => {
-        res.status(400).send({
-            staus: true,
-            message: "Admin is successfully created",
-            data: []
-        })
+        
+            res.status(200).send({
+                staus: true,
+                message: `Admin created successfully`
+            })
     })
 
     .catch(err => {
         res.status(200).send({
             status: false,
-            message: "Kindly try again later , This is on us",
+            message: err.message,
             response: []
          })
     })
 
 }
 
+const rethailLogin = (req, res) => {
+    const { email, password } = req.body   
 
+    if (!email || !password) {
+        res.status(422).send({
+            status: "sucess",
+            message: 'user login Invalid',
+            data: []
+        })
+    }
 
+    if (email == email && password == Password) {
+        next()
+  
+      } else {
+          res.status(401).send({
+              status: "sucess",
+              message: 'Unauthorized Acesss',
+              data: []
+              
+          
+          })
+      }
+  
+} 
 
+ 
 
 module.exports = {
-    createNewRetailUser
+    createNewRetailUser,
+    rethailLogin
 }
 
 
