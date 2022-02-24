@@ -1,12 +1,11 @@
 const mySqlConnection = require('../config/mysql')
 
-const purchaseInfo = async (productID, quantityOfEach,  amountOfEachProduct, purchaseID, totalAmountOfPurchase, modeOfPayment ) =>{
+const purchaseInfo = async (productName, quantityOfEach,  amountOfEachProduct, purchaseID ) =>{
     return new Promise ((resolve, reject) =>{
         mySqlConnection.query({
-            sql: `Insert into purchase (product_id, quantity_of_each_product, amount_of_each_product, purchase_id, total_amount_of_purchase, mode_of_payment)values (?,?,?,?,?,?)`,
-            values: [productID, quantityOfEach, amountOfEachProduct, purchaseID, totalAmountOfPurchase, modeOfPayment]
+            sql: `Insert into purchase (product_name, quantity_of_each_product, amount_of_each_product, purchase_id)values (?,?,?,?,?,?)`,
+            values: [productName, quantityOfEach, amountOfEachProduct, purchaseID]
         }
-
         , (err, results, fields) =>{
             if(err){
                 reject(err);
