@@ -3,10 +3,10 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mySqlConnection = require('./config/mysql')
-const userRoutes = require('./routes/test')
+const userRoutes = require('./routes/retail_routes')
 const port = process.env.PORT
 const displayRoutes = require('express-routemap')
-
+const morgan = require('morgan')
 
 app.listen(port, () => {
     console.log(`i am listening on ${port}`)
@@ -22,3 +22,4 @@ mySqlConnection.connect(err => {
 
 app.use(bodyParser.json())
 app.use(userRoutes)
+app.use(morgan('combined'))
