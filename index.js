@@ -6,7 +6,7 @@ const morgan = require('morgan')
 const displayRoutes = require('express-routemap')
 const mySqlConnection = require('./config/mysql')
 const stockRoutes = require('./routes/stock.routes')
-
+const PurchaseRoutes = require('./routes/purchase.routes')
 
 
 
@@ -27,7 +27,7 @@ mySqlConnection.connect(err =>{
 
 app.use(morgan('combined'))
 app.use(stockRoutes)
-
+app.use(PurchaseRoutes)
 
 
 app.get('/', (req, res) =>{

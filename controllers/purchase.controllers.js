@@ -1,7 +1,6 @@
 require('dotenv').config()
 const{ v4: uuidv4 } = require('uuid')
 require('dotenv').config()
-const{ v4: uuidv4 } = require('uuid')
 const {purchaseInfo} = require("../models/purchase.models")
 const {getStockDetails, updateProductQuantity, getProductInfo } = require("../models/stock.models")
 
