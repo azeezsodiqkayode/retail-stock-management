@@ -2,24 +2,46 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const displayRoutes = require('express-routemap')
 const mySqlConnection = require('./config/mysql')
+const stockRoutes = require('./routes/stock.routes')
+const PurchaseRoutes = require('./routes/purchase.routes')
 const userRoutes = require('./routes/retail_routes')
 const port = process.env.PORT
-const displayRoutes = require('express-routemap')
-const morgan = require('morgan')
 
-app.listen(port, () => {
+app.use(bodyParser.json())
+
+app.listen(port, ()=>{
     console.log(`i am listening on ${port}`)
     displayRoutes(app)
 })
 
 
-mySqlConnection.connect(err => {
+mySqlConnection.connect(err =>{
     if (err) throw err.stack
-    console.log('successfully connected: ' , mySqlConnection.threadId)
-  })
- 
 
-app.use(bodyParser.json())
-app.use(userRoutes)
+    console.log('successfully connected: ', mySqlConnection.threadId)
+})
+
 app.use(morgan('combined'))
+app.use(userRoutes)
+app.use(stockRoutes)
+app.use(PurchaseRoutes)
+
+
+app.get('/', (req, res) =>{
+    res.status(200).send({
+        status: "error",
+        message: "Lets get started"
+    })
+})
+
+app.get((req, res, next) =>{
+    res.status(404).send({
+        status: "error",
+        message: "what are you looking for?"
+    })
+})
+
+
