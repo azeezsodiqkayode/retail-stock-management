@@ -3,7 +3,7 @@ const{ v4: uuidv4 } = require('uuid')
 const {getProductInfo, newStock, createProductInfo, 
         getStockDetails, updateProductQuantity} = require('../models/stock.models')
 const Joi = require('joi')
-const { isEmpty, doSomeAsyncMagik } = require('../utils/utils')
+const { isEmpty, asyncErrorHandler } = require('../utils/utils')
 
 
 const generateProductID = async(req, res) =>{
@@ -50,7 +50,7 @@ const addToStock = async (req, res) =>{
     const { productName, quantity, pricePerUnit}= req.body
 
     try{
-        const [err, checkIfProductExists] = await doSomeAsyncMagik(getProductInfo(productName))
+        const [err, checkIfProductExists] = await asyncErrorHandler(getProductInfo(productName))
         if(err){
             throw new Error("Internal Error")
         }
@@ -68,7 +68,7 @@ const addToStock = async (req, res) =>{
 
         const productID = checkIfProductExists[0].product_id
 
-        const [err2, checkIfStockExist] = await doSomeAsyncMagik(getStockDetails(productID))
+        const [err2, checkIfStockExist] = await asyncErrorHandler(getStockDetails(productID))
         if(err2){
             throw new Error ("Internal Error")
         }
@@ -86,7 +86,7 @@ const addToStock = async (req, res) =>{
         console.log(productID)
 
 
-        const [err3, checkIfProductUpdate] = await doSomeAsyncMagik(updateProductQuantity(newQuantity, productID))
+        const [err3, checkIfProductUpdate] = await asyncErrorHandler(updateProductQuantity(newQuantity, productID))
         if (err3){
             throw new Error ("Internal Error")
         }   

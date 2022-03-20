@@ -1,28 +1,41 @@
 {
   "name": "retail-stock-management",
   "version": "1.0.0",
-  "description": "Retail Stock Management",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "test": "node index.js",
     "dev": "nodemon index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azeezsodiqkayode/retail-stock-management.git"
+  },
   "keywords": [],
-  "author": "taofeeq Adedokun <feeq2022@gmail.com>",
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azeezsodiqkayode/retail-stock-management/issues"
+  },
+  "homepage": "https://github.com/azeezsodiqkayode/retail-stock-management#readme",
   "dependencies": {
-    "body-parser": "^1.19.2",
+    "@sendgrid/mail": "^7.6.2",
+    "await-to-js": "^3.0.0",
+    "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-routemap": "^1.6.0",
+    "form-data": "^4.0.0",
+    "handlebars": "^4.7.7",
     "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
+    "uuid": "^8.3.2",
     "uuidv4": "^6.2.12"
-    "jsonwebtoken": "^8.4.0",
-    "uuid": "^8.3.2"
   }
 }

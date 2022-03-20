@@ -27,17 +27,17 @@ const purchaseList = async (req, res) =>{
                 let productName = itemData.productName
                 let amountOfEachProduct = itemData.amount
                 
-                const [err3, checkProductDetails]= await doSomeAsyncMagik(getProductInfo(productName))
+                const [err3, checkProductDetails]= await asyncErrorHandler(getProductInfo(productName))
                 productID = checkProductDetails[0].product_id
 
-                const [err4, checkProductQuantity] = await doSomeAsyncMagik(getStockDetails(productID))
+                const [err4, checkProductQuantity] = await asyncErrorHandler(getStockDetails(productID))
                 productQuantity = checkProductQuantity[0].quantity
 
                 const updatedQuantity = parseInt(productQuantity) - parseInt(quantityOfEach)
 
-                const [err5, checkProductQunatityUpdated] = await doSomeAsyncMagik(updateProductQuantity(updatedQuantity, productID))
+                const [err5, checkProductQunatityUpdated] = await asyncErrorHandler(updateProductQuantity(updatedQuantity, productID))
 
-                const [err2, checkIfPurchaseIsLogged] = await doSomeAsyncMagik(purchaseInfo(productName, quantityOfEach,amountOfEachProduct,purchaseID))
+                const [err2, checkIfPurchaseIsLogged] = await asyncErrorHandler(purchaseInfo(productName, quantityOfEach,amountOfEachProduct,purchaseID))
                 if(err2){
                     throw new Error ("Internal Error")
                 }

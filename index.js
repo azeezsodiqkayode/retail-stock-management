@@ -7,11 +7,10 @@ const displayRoutes = require('express-routemap')
 const mySqlConnection = require('./config/mysql')
 const stockRoutes = require('./routes/stock.routes')
 const PurchaseRoutes = require('./routes/purchase.routes')
-const userRoutes = require('./routes/retail_routes')
+const adminRoutes = require('./routes/admin.routes')
 const port = process.env.PORT
 
 app.use(bodyParser.json())
-
 app.listen(port, ()=>{
     console.log(`i am listening on ${port}`)
     displayRoutes(app)
@@ -25,7 +24,7 @@ mySqlConnection.connect(err =>{
 })
 
 app.use(morgan('combined'))
-app.use(userRoutes)
+app.use(adminRoutes)
 app.use(stockRoutes)
 app.use(PurchaseRoutes)
 
