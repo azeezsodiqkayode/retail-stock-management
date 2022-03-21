@@ -99,6 +99,23 @@ const updateAdminPassword = async (password, email) => {
     })
 }
 
+const updateAttendantPassword = async (password, email) => {
+   
+    return new Promise((resolve, reject) => {
+
+        mysqlConnection.query({
+            sql: `update attendant set password=? where email=?`,
+            values: [password, email]
+        },
+          (err, results, fields) => {
+                if (err) {
+                 reject(err)
+                }
+                resolve(results)
+          })
+    })
+}
+
 const deleteResetPasswordRecord = async (hash) => {
    
     return new Promise((resolve, reject) => {
@@ -124,6 +141,7 @@ module.exports = {
     forgetPasswordModel,
     validateHash,
     updateAdminPassword,
+    updateAttendantPassword,
     deleteResetPasswordRecord
     
 }
